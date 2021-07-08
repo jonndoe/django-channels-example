@@ -9,8 +9,8 @@ urlpatterns = [
     path(r'comments/', include('django_comments_xtd.urls')),
     path(r'admin/', admin.site.urls),
     path(r'blog/', include('blog.urls', namespace='blog')),
-    path(r'', TemplateView.as_view(template_name="home.html"),
-        name='homepage'),
+    path(r'chat/', include('chat.urls', namespace='chat')),
+    path(r'', TemplateView.as_view(template_name="home.html"), name='homepage'),
 ]
 
 
