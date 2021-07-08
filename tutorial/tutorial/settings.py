@@ -186,11 +186,14 @@ COMMENTS_XTD_APP_MODEL_OPTIONS = {
 
 ### sockpuppet settings
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
-# in the same folder as wsgi.py
-ASGI_APPLICATION = 'sockpuppet.routing.application'
+# in the chat.routing
+ASGI_APPLICATION = 'chat.routing.application'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
