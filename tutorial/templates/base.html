@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="turbolinks-root" content="/">
+    <meta name="turbolinks-cache-control" content="no-cache">
+
+    <title>{% block title %}django-comments-xtd tutorial{% endblock %}</title>
+    <link 
+      rel="stylesheet" 
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" 
+      crossorigin="anonymous">
+
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <!-- link href="{% static 'css/bootstrap.lumen.min.css' %}" rel="stylesheet" -->
+    <!-- link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" -->
+    
+    <!-- Your stuff: Third-party CSS libraries go here -->
+
+    <!-- This file stores ALL css for project, and it was build with webpack CSS -->
+    <link href="{% static 'app.css' %}" rel="stylesheet">
+ 
+    <!-- Your stuff: Third-party javascript libraries go here -->
+    <!-- script defer src="{% static 'js/bootstrap/jquery.min.js' %}"></script -->
+    <!-- script defer src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script -->
+    <!-- script defer src="{% static 'js/bootstrap/prism.js' %}"></script -->
+    
+    <!-- place app.js which is webpack build combination of all project .js files -->
+    <script type="module" src="{% static 'app.js' %}" data-turbolinks-eval="false"></script>
+    
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'homepage' %}">Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog:post_list' %}">Posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog:search_page' %}">Search</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reflexes</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'blog:example_reflex' %}">Count Reflex</a>
+                <a class="dropdown-item" href="{% url 'blog:example_reflex_js' %}">Count Reflex Js</a>
+                <a class="dropdown-item" href="{% url 'blog:book_search_reflex' %}">Book Search Reflex</a>
+                <a class="dropdown-item" href="{% url 'blog:chat_reflex' %}">Chat Reflex</a>
+                <a class="dropdown-item" href="{% url 'blog:signup_reflex' %}">Signup Reflex</a>
+                <a class="dropdown-item" href="{% url 'blog:blog_search_reflex' %}">Posts Search Reflex</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </li>
+          </ul>
+          <form class="d-flex" action="{% url 'blog:search_result' %}" method="get">
+            <input name="q" class="form-control me-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row my-4">
+        <div class="col-lg-12">
+	      <h5 class="text-center">django-blog-example</h5>
+          <hr/>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <hr/>
+          <p class="text-center text-muted small">django-blog-example.</p>
+        </div>
+      </div>
+    </div>
+
+    {% block extra-js %}
+    {% endblock %}
+  </body>
+</html>

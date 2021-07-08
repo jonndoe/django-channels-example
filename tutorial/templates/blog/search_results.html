@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+  <div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>Search</h1>
+    <p>Click for details</p>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Post</th>
+        <th scope="col">Primary Key</th>
+        <th scope="col">Date</th>
+        <th scope="col">Author</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for post in post_list %}
+      <tr>
+        <th scope="row"><h3><a class="nounderline" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3></th>
+        <td>{{ post.pk }}</td>
+        <td>{{ post.publish }}</td>
+        <td>Anonymos</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

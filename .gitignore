@@ -1,0 +1,16 @@
+/tutorial/node_modules/*
+._*
+__pycache__/*
+db.sqlite3
+
+*.pyc
+
+/tutorial/collectedstatic/*
+
+/tutorial/db.sqlite3
+
+/tutorial/blog/__pycache__/*
+
+/tutorial/tutorial/__pycache__/*
+
+/tutorial/static/*

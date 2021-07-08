@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load humanize %}
+
+{% block subtitle %}{{ subtitle }}{% endblock subtitle %}
+
+{% block content %}
+<div class="container">
+  <form data-controller="blog_search" data-reflex-root="#morph" class="">
+    <input type="text" placeholder="search for a post ..." data-target="blog_search.query"
+      data-action="debounced:input->blog_search#perform" class="form-control"/>
+    <div id="morph">
+      <div>
+        <span data-target="blog_search.activity" class="" hidden>
+          <i class="fas fa-spinner fa-spin"></i>
+          Searching for posts...
+        </span>
+        <span data-target="blog_search.count" class="">
+          <strong>{{count|default:0|intcomma}}</strong> posts found
+        </span>
+      </div>
+      <table data-target="blog_search.list" {% if  not posts %} hidden {% endif %}>
+        <thead>
+          <tr>
+            <th scope="col">Post</th>
+            <th scope="col">Primary Key</th>
+            <th scope="col">Date</th>
+            <th scope="col">Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in posts|slice:'0:5'  %}
+          <tr>
+            <th scope="row"><h3><a class="nounderline" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3></th>
+            <td>{{ post.pk }}</td>
+            <td>{{ post.publish }}</td>
+            <td>Anonymos</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+{% block content %}
+    
+    
+    
+    <h3> This Reflex is compiled with webpack and it has javascript controller.</h3>
+    <a  href="#"
+        data-controller="examplereflex_with_js"
+        data-action="click->examplereflex_with_js#increment"
+        data-count="{{ count }}"
+    >Increment </a><span>{{ count }}</span>
+    
+{% endblock content %}

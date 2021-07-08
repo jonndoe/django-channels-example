@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% load humanize %}
+
+{% block subtitle %}{{ subtitle }}{% endblock subtitle %}
+
+{% block content %}
+<article id="red"
+    data-controller="chat"
+    data-action="chats:added@document->chat#reload cable-ready:after-morph@document->chat#scroll"
+    data-reflex-root="#chat-container"
+    >
+    <span id="chat-container" data-target="chat.list">
+      {% for chat in chats  %}
+        <aside class="message" style="min-height:auto; margin-top: 15px;">
+          <p>
+          {{ chat.message }} <sup>{{ chat.created_at|timesince }} ago </sup>
+          </p>
+        </aside>
+      {% endfor %}
+      <div>
+        <h6>Messages stored <h3>{{chats|length}}</h3></h6>
+        Note , that this Messages stored value is updated at every reflex action. It is inside data-reflex-root="#chat-container".
+      </div>
+    </span>
+    <form>
+      <textarea data-target="chat.input" placeholder="Type your message.." minlength="4"></textarea>
+      <button data-action="click->chat#post" type="submit"> Send </button>
+      <div>
+        <h6>Messages stored <h3>{{chats|length}}</h3></h6>
+        Note, that Messages stored value is not updated at every new message arrived,
+         instead you have to reload the page.
+          That is because it is not in data-reflex-root="#chat-container".
+      </div>
+    </form>
+</article>
+{% endblock %}
