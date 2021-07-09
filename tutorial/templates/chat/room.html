@@ -1,14 +1,21 @@
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
+{% load static %}
+
+
+{% block content %}
+
+    <div class="form-group">
+      <label for="exampleTextarea" class="form-label mt-4">textarea</label>
+      <textarea class="form-control" id="chat-log" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="col-form-label col-form-label-lg mt-4" for="inputLarge"></label>
+      <input class="form-control form-control-lg" type="text" placeholder="Type your message..." id="chat-message-input">
+    </div>
+    
+    <input class="btn btn-info" id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
@@ -46,5 +53,4 @@
             messageInputDom.value = '';
         };
     </script>
-</body>
-</html>
+{% endblock content %}
