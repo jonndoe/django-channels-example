@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+{% block content %}
+
+    <h3> This is progress bar example. This is implemented with sockpuppet. This progress bar is updated every time user clicks a button.</h3>
+    <h1>Progress Bar Demo</h1>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated"
+           role="progressbar"
+           aria-valuenow="75"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           style="width: {{ status }}%;"><b>{{ status }} %</b>
+      </div>
+    </div>
+
+    <a  href="#"
+        data-controller="progress_bar"
+        data-action="click->progress_bar#increment"
+        data-status="{{ status }}"
+        class="btn btn-success"
+    >Increment Progress Bar</a>
+
+{% endblock content %}

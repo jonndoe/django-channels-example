@@ -9,6 +9,7 @@ import Book_SearchController from './controllers/book_search_controller'
 import ChatController from './controllers/chat_controller'
 import SignupController from './controllers/signup_controller'
 import Blog_SearchController from './controllers/blog_search_controller'
+import Progress_BarController from './controllers/progress_bar_controller'
 
 
 debounced.initialize()
@@ -26,5 +27,6 @@ application.register("book_search", Book_SearchController)
 application.register("chat", ChatController)
 application.register("signup", SignupController)
 application.register("blog_search", Blog_SearchController)
+application.register("progress_bar", Progress_BarController)
 
 StimulusReflex.initialize(application, { consumer, debug: true })
