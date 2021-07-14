@@ -6,7 +6,7 @@ import channels
 
 # CableReadyConsumer should have been imported from blog app, but
 # it gives error. So implement it in .consumers for now.
-from .consumers import ChatConsumer, CableReadyConsumer
+from .consumers import ChatConsumer, CableReadyConsumer, StimulusReflexConsumer
 
 print('chat.routing working now.')
 
@@ -17,12 +17,16 @@ if int(channels_version) >= 3:
         re_path(r'ws/sockpuppet-sync', SockpuppetConsumer.as_asgi()),
         re_path(r'ws/chat/(?P<room_name>\w+)/$', ChatConsumer.as_asgi()),
         re_path(r'ws/cableready-sync', CableReadyConsumer.as_asgi()),
+        re_path(r'cable', StimulusReflexConsumer.as_asgi()),
     ]
 else:
     from sockpuppet.consumer import SockpuppetConsumer
-    socket_patterns = [re_path(r'ws/sockpuppet-sync', SockpuppetConsumer)],
-    re_path(r'ws/chat/(?P<room_name>\w+)/$', ChatConsumer.as_asgi()),
-    re_path(r'ws/cableready-sync', CableReadyConsumer.as_asgi()),
+    socket_patterns = [
+        re_path(r'ws/sockpuppet-sync', SockpuppetConsumer),
+        re_path(r'ws/chat/(?P<room_name>\w+)/$', ChatConsumer.as_asgi()),
+        re_path(r'ws/cableready-sync', CableReadyConsumer.as_asgi()),
+        re_path(r'cable', StimulusReflexConsumer.as_asgi()),
+    ]
 
 application = ProtocolTypeRouter({
     'websocket': AllowedHostsOriginValidator(

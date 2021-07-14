@@ -11,7 +11,7 @@ import("./js/bootstrap/jquery.min");
 import("./js/bootstrap/prism");
 import("./js/turbolinks");
 import("./js/project");
-
+import("./js/ruby-ws-conn");
 
 
 import("../blog/javascript/all_reflexes");
