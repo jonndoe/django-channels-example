@@ -11,9 +11,9 @@ import("./js/bootstrap/jquery.min");
 import("./js/bootstrap/prism");
 import("./js/turbolinks");
 import("./js/project");
-import("./js/ruby-ws-conn");
-
-
+//import("./js/ruby-ws-conn");
+//import("./js/django-stimulus-reflex");
+//import("./js/vanila-ruby-client");
 import("../blog/javascript/all_reflexes");
 
 

@@ -92,16 +92,33 @@ class CableReadyConsumer(AsyncWebsocketConsumer):
 
 class StimulusReflexConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        # self.room_name = self.scope['url_route']['kwargs']['room_name']
-        # self.room_group_name = 'chat_%s' % self.room_name
+        self.group = 'connected'
 
         # Join room group
-        # await self.channel_layer.group_add(
-        #    self.room_group_name,
-        #    self.channel_name
-        #)
+        await self.channel_layer.group_add(
+            self.group,
+            self.channel_name
+        )
 
         await self.accept()
+
+        await self.send(json.dumps("{\"type\":\"welcome\"}"))
+        await self.send(json.dumps({"type": "welcome"}, separators=(',', ':')))
+        #await self.send(json.dumps({"setAttribute": [{"selector": "#progress-bar", "name": "style", "value": f"width:50%"}]}))
+        '''
+        await self.send(json.dumps({"identifier": "{\"channel\":\"StimulusReflex::Channel\"}",
+                                    "type": "message",
+                                    "cableReady": "true",
+                                    "operations": {"setAttribute": [{"selector": "#progress-bar",
+                                                                     "name": "style",
+                                                                     "value": "width: 110%"
+                                                                     }
+                                                                    ]
+                                                   }
+                                    }))
+        '''
+
+
 
     async def disconnect(self, close_code):
         # Leave room group

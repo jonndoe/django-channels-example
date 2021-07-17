@@ -1,0 +1,32 @@
+import { Application } from 'stimulus'
+import StimulusReflex from 'stimulus_reflex'
+//import WebsocketConsumer from 'sockpuppet-js'
+import { createConsumer } from "@rails/actioncable"
+import CableReady from 'cable_ready'
+import debounced from 'debounced'
+
+import Examplereflex_With_JsController from '../../blog/javascript/controllers/examplereflex_with_js_controller'
+import Book_SearchController from '../../blog/javascript/controllers/book_search_controller'
+import ChatController from '../../blog/javascript/controllers/chat_controller'
+import SignupController from '../../blog/javascript/controllers/signup_controller'
+import Blog_SearchController from '../../blog/javascript/controllers/blog_search_controller'
+import Progress_BarController from '../../blog/javascript/controllers/progress_bar_controller'
+
+debounced.initialize()
+
+const application = Application.start()
+const ssl = location.protocol !== 'https:' ? '' : 's';
+
+
+//const consumer = new WebsocketConsumer(`ws${ssl}://${location.hostname}:${location.port}/ws/sockpuppet-sync`)
+const consumer = createConsumer(`ws${ssl}://${location.hostname}:${location.port}/ws/stimulus-reflex-sync`);
+consumer.subscriptions.create({ channel: "StimulusReflex::Channel", room: "Best Room" });
+
+application.register("examplereflex_with_js", Examplereflex_With_JsController)
+application.register("book_search", Book_SearchController)
+application.register("chat", ChatController)
+application.register("signup", SignupController)
+application.register("blog_search", Blog_SearchController)
+application.register("progress_bar", Progress_BarController)
+
+StimulusReflex.initialize(application, { consumer, debug: true })

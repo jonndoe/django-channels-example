@@ -17,7 +17,8 @@ if int(channels_version) >= 3:
         re_path(r'ws/sockpuppet-sync', SockpuppetConsumer.as_asgi()),
         re_path(r'ws/chat/(?P<room_name>\w+)/$', ChatConsumer.as_asgi()),
         re_path(r'ws/cableready-sync', CableReadyConsumer.as_asgi()),
-        re_path(r'cable', StimulusReflexConsumer.as_asgi()),
+        #re_path(r'cable', StimulusReflexConsumer.as_asgi()),
+        #re_path(r'ws/stimulus-reflex-sync', StimulusReflexConsumer.as_asgi()),
     ]
 else:
     from sockpuppet.consumer import SockpuppetConsumer
@@ -25,7 +26,8 @@ else:
         re_path(r'ws/sockpuppet-sync', SockpuppetConsumer),
         re_path(r'ws/chat/(?P<room_name>\w+)/$', ChatConsumer.as_asgi()),
         re_path(r'ws/cableready-sync', CableReadyConsumer.as_asgi()),
-        re_path(r'cable', StimulusReflexConsumer.as_asgi()),
+        #re_path(r'cable', StimulusReflexConsumer.as_asgi()),
+        #re_path(r'ws/stimulus-reflex-sync', StimulusReflexConsumer.as_asgi()),
     ]
 
 application = ProtocolTypeRouter({
